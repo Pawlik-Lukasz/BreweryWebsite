@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import requests
 
 # make Flask application with home, contact, and search brewery
@@ -14,16 +14,14 @@ breweries = requests.get(url=f"https://api.openbrewerydb.org/v1/breweries/search
 print(breweries.json())
 
 
-#
-# app = Flask(__name__)
-#
-#
-# @app.route("/")
-# def hello_world():
-#     return "<p>Hello, World!</p>"
+app = Flask(__name__)
 
 
-# Press the green button in the gutter to run the script.
-# if __name__ == '__main__':
-#     app.run(debug=True)
+@app.route("/")
+def hello_world():
+    return render_template(template_name_or_list="index.html")
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
