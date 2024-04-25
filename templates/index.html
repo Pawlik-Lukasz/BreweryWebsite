@@ -9,27 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar fixed-top navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">Brewery Site</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="">Home</a></li>
-            <li><a href="#">Contact</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">Search Your Brewery
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{ url_for('search') }}">Search</a></li>
-                    <li><a href="#">Localization</a></li>
-                    <li><a href="#">Phone</a></li>
-                    <li><a href="#">Type</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
-
+    {% include "navbar.html" %}
 </body>
 </html>
