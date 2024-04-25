@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Search Your Brewery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+    {% include "navbar.html" %}
 <body>
-Search for brewery here
+<p>Input Your search below:</p>
+<b></b>
+
+<form action="/">
+  <div class="form-group">
+    <label>Brewery to search:</label>
+    <input class="form-control" id="brewery">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
 </body>
 </html>
