@@ -18,8 +18,13 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template(template_name_or_list="index.html")
+
+
+@app.route("/search")
+def search():
+    return render_template(template_name_or_list="search.html")
 
 
 if __name__ == '__main__':
