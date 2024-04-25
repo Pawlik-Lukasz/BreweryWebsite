@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 
 # make Flask application with home, contact, and search brewery
@@ -9,17 +9,23 @@ import requests
 # user can append breweries from search-brewery sub-site that they like
 
 
-search = "family"
-breweries = requests.get(url=f"https://api.openbrewerydb.org/v1/breweries/search?query={search}")
-print(breweries.json())
-
-
 app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template(template_name_or_list="index.html")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "POST":
+        brewery_search = request.form["message"]
+        breweries = requests.get(url=f"https://api.openbrewerydb.org/v1/breweries/search?query={brewery_search}")
+        print(breweries.json())
+        return render_template(template_name_or_list="search.html")
+    else:
+        return render_template(template_name_or_list="search.html")
 
 
 if __name__ == '__main__':
