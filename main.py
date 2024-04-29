@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+import random
 
 # make Flask application with home, contact, and search brewery
 # if user wants to search for brewery, they can input text.
@@ -22,8 +23,12 @@ def search():
     if request.method == "POST":
         brewery_search = request.form["message"]
         breweries = requests.get(url=f"https://api.openbrewerydb.org/v1/breweries/search?query={brewery_search}")
-        print(breweries.json())
-        return render_template(template_name_or_list="search.html")
+        breweries_json = breweries.json()
+        try:
+            random_breweries = random.sample(breweries_json, 5)
+            return render_template(template_name_or_list="results.html", breweries=random_breweries)
+        except ValueError:
+            return render_template(template_name_or_list="index.html")
     else:
         return render_template(template_name_or_list="search.html")
 
