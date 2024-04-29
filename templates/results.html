@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Results</title>
-</head>
+{% extends "base.html" %}
+{% include "navbar.html" %}
+{% block content %}
 <body>
     {% for brewery in breweries: %}
         <h1>{{brewery.name}}</h1>
         <p>City: {{brewery.city}}</p>
     {% endfor %}
 </body>
-</html>
+{% endblock %}
