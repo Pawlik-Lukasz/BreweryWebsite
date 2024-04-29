@@ -24,8 +24,11 @@ def search():
         brewery_search = request.form["message"]
         breweries = requests.get(url=f"https://api.openbrewerydb.org/v1/breweries/search?query={brewery_search}")
         breweries_json = breweries.json()
-        random_breweries = random.sample(breweries_json, 5)
-        return render_template(template_name_or_list="results.html", breweries=random_breweries)
+        try:
+            random_breweries = random.sample(breweries_json, 5)
+            return render_template(template_name_or_list="results.html", breweries=random_breweries)
+        except ValueError:
+            return render_template(template_name_or_list="index.html")
     else:
         return render_template(template_name_or_list="search.html")
 
