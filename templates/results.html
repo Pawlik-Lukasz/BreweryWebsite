@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% include "navbar.html" %}
+
 {% block content %}
-<body>
-    {% for brewery in breweries: %}
-        <h1>{{brewery.name}}</h1>
-        <p>City: {{brewery.city}}</p>
-    {% endfor %}
-</body>
+
+{% for brewery in breweries: %}
+    <h1>{{brewery.name}}</h1>
+    <p>City: {{brewery.city}}</p>
+    <a href="{{ url_for('favourites') }}">Add to Your Favourites!</a>
+
+{% endfor %}
+
 {% endblock %}

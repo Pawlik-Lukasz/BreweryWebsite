@@ -33,6 +33,14 @@ def search():
         return render_template(template_name_or_list="search.html")
 
 
+@app.route("/favourites", methods=["GET", "POST"])
+def favourites():
+    if request.method == "GET":
+        return render_template(template_name_or_list="favourites.html")
+    else:
+        return render_template(template_name_or_list="favourites.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
