@@ -2,11 +2,12 @@
 {% include "navbar.html" %}
 
 {% block content %}
-
+{% for brew in list_of_brews: %}
 <p>This is Your fav!</p>
-<h1>Name: {{ brew_name }}</h1>
-<h2>Address: {{ brew_addr }}</h2>
-<h3>Country: {{ brew_country }}</h3>
-<a href="{{ brew_url }}"> Website of Brewery </a>
+<h1>Name: {{ brew["name"] }}</h1>
+<h2>Address: {{ brew["address_1"] }}</h2>
+<h3>Country: {{ brew["country"] }}</h3>
+<a href="{{ brew['website_url'] }}"> Website of Brewery </a>
+{% endfor %}
 
 {% endblock %}

@@ -49,17 +49,14 @@ def search():
 def favourites():
     if request.method == "GET":
         with open('fav_brew.txt', 'r', encoding='utf-8') as f:
-            read = f.read()
-            brew_dict = eval(read)
-            brew_name = brew_dict["name"]
-            brew_addr = brew_dict["address_1"]
-            brew_country = brew_dict["country"]
-            brew_url = brew_dict["website_url"]
+            list_of_brews = []
+            [list_of_brews.append(eval(line)) for line in f.readlines()]
+
         return render_template(template_name_or_list="favourites.html",
-                               brew_name=brew_name, brew_addr=brew_addr, brew_country=brew_country, brew_url=brew_url)
+                               list_of_brews=list_of_brews)
     else:
-        with open('fav_brew.txt', 'w', encoding='utf-8') as f:
-            f.write(request.form["chosen-brewery"])
+        with open('fav_brew.txt', 'a', encoding='utf-8') as f:
+            f.write(request.form["chosen-brewery"] + '\n')
         return render_template(template_name_or_list="index.html")
 
 
