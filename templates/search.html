@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+<!-- from 'bootstrap5/form.html' import render_form -->
 {% include "navbar.html" %}
 {% block content %}
+<!--     render_form(form, novalidate=True) -->
+
 <form action="{{ url_for('search') }}"
       method="post"
       id="searchForm"

@@ -6,7 +6,17 @@
 {% for brewery in breweries: %}
     <h1>{{brewery.name}}</h1>
     <p>City: {{brewery.city}}</p>
-    <a href="{{ url_for('favourites') }}">Add to Your Favourites!</a>
+    <div>
+        <form action="{{ url_for('favourites') }}"
+              method="post"
+              id="favForm"
+              name="favBrewery">
+        <div class="form-group">
+            <input type="hidden" name="chosen-brewery" value="{{ brewery }}"/>
+        </div>
+        <button type="submit" class="btn btn-default">Add to favourites!</button>
+        </form>
+    </div>
 
 {% endfor %}
 

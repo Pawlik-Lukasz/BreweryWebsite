@@ -1,6 +1,12 @@
 from flask import Flask, render_template, request
+from flask_bootstrap5 import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import DataRequired
 import requests
 import random
+import ast
+
 
 # make Flask application with home, contact, and search brewery
 # if user wants to search for brewery, they can input text.
@@ -13,6 +19,11 @@ import random
 app = Flask(__name__)
 
 
+# class FavForm(FlaskForm):
+#     brewery = StringField('Brewery Rating', validators=[DataRequired()])
+#     submit = SubmitField('Submit')
+
+
 @app.route("/")
 def home():
     return render_template(template_name_or_list="index.html")
@@ -20,6 +31,7 @@ def home():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    # form = FavForm(request.form)
     if request.method == "POST":
         brewery_search = request.form["message"]
         breweries = requests.get(url=f"https://api.openbrewerydb.org/v1/breweries/search?query={brewery_search}")
@@ -36,11 +48,20 @@ def search():
 @app.route("/favourites", methods=["GET", "POST"])
 def favourites():
     if request.method == "GET":
-        return render_template(template_name_or_list="favourites.html")
+        with open('fav_brew.txt', 'r', encoding='utf-8') as f:
+            read = f.read()
+            brew_dict = eval(read)
+            brew_name = brew_dict["name"]
+            brew_addr = brew_dict["address_1"]
+            brew_country = brew_dict["country"]
+            brew_url = brew_dict["website_url"]
+        return render_template(template_name_or_list="favourites.html",
+                               brew_name=brew_name, brew_addr=brew_addr, brew_country=brew_country, brew_url=brew_url)
     else:
-        return render_template(template_name_or_list="favourites.html")
+        with open('fav_brew.txt', 'w', encoding='utf-8') as f:
+            f.write(request.form["chosen-brewery"])
+        return render_template(template_name_or_list="index.html")
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-

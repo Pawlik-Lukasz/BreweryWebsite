@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% include "navbar.html" %}
+
 {% block content %}
-<p>This is Your fav</p>
+
+<p>This is Your fav!</p>
+<h1>Name: {{ brew_name }}</h1>
+<h2>Address: {{ brew_addr }}</h2>
+<h3>Country: {{ brew_country }}</h3>
+<a href="{{ brew_url }}"> Website of Brewery </a>
+
 {% endblock %}
