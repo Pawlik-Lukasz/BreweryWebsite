@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_bootstrap5 import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
@@ -6,6 +6,8 @@ from wtforms.validators import DataRequired
 import requests
 import random
 import ast
+import os
+from dotenv import load_dotenv
 
 
 # make Flask application with home, contact, and search brewery
@@ -15,8 +17,9 @@ import ast
 # if you will be able to do that, make another sub-site to which
 # user can append breweries from search-brewery sub-site that they like
 
-
+load_dotenv()
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY")
 
 
 # class FavForm(FlaskForm):
@@ -57,7 +60,8 @@ def favourites():
     else:
         with open('fav_brew.txt', 'a', encoding='utf-8') as f:
             f.write(request.form["chosen-brewery"] + '\n')
-        return render_template(template_name_or_list="index.html")
+            flash("Your brewery was added to Your favourites")
+        return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
