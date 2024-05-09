@@ -60,7 +60,7 @@ def favourites():
     else:
         with open('fav_brew.txt', 'a', encoding='utf-8') as f:
             f.write(request.form["chosen-brewery"] + '\n')
-            flash("Your brewery was added to Your favourites")
+        flash("Your brewery was added to Your favourites")
         return redirect(url_for('home'))
 
 

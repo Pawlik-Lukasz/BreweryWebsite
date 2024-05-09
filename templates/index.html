@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% include "navbar.html" %}
 {% block content %}
+
 <p>Hello main page!</p>
+    {% for mesg in get_flashed_messages() %}
+        <h1>{{ mesg }}</h1>
+    {% endfor %}
+
 {% endblock %}
