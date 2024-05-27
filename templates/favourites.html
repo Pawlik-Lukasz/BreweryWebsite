@@ -2,12 +2,27 @@
 {% include "navbar.html" %}
 
 {% block content %}
-{% for brew in list_of_brews: %}
-<p>This is Your fav!</p>
-<h1>Name: {{ brew["name"] }}</h1>
-<h2>Address: {{ brew["address_1"] }}</h2>
-<h3>Country: {{ brew["country"] }}</h3>
-<a href="{{ brew['website_url'] }}"> Website of Brewery </a>
-{% endfor %}
+    {% if list_of_brews == []: %}
+        <p>No favourite breweries here yet!</p>
 
+    {% else: %}
+        {% for brew in list_of_brews: %}
+            <p>This is Your fav!</p>
+            <h1>Name: {{ brew["name"] }}</h1>
+            <h2>Address: {{ brew["address_1"] }}</h2>
+            <h3>Country: {{ brew["country"] }}</h3>
+            <a href="{{ brew['website_url'] }}"> Website of Brewery </a>
+            <div>
+                <form action="{{ url_for('delete_fav') }}"
+                      method="post"
+                      id="delForm"
+                      name="delBrewery">
+                <div class="form-group">
+                    <input type="hidden" name="brewery-delete" value="{{ brew['name'] }}"/>
+                </div>
+                <button type="submit" class="btn btn-default">Delete this brewery :(</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
