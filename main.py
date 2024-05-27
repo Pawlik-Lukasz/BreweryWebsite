@@ -64,5 +64,17 @@ def favourites():
         return redirect(url_for('home'))
 
 
+@app.route('/deleted', methods=["POST"])
+def delete_fav():
+    with open("fav_brew.txt", "r") as f:
+        lines = f.readlines()
+    with open('fav_brew.txt', 'w', encoding='utf-8') as f:
+        for line in lines:
+            if request.form["brewery-delete"] not in line:
+                f.write(line)
+    flash(f'Your favourite brewery {request.form["brewery-delete"]} was deleted :(')
+    return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
