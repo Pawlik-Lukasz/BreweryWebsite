@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% include "navbar.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn") }}
+            </div>
+        </form>
+    </div>
+    <div class="border-top">
+        <p>Don't Have An Account Yet? </p>
+        <a href="{{ url_for('register') }}">Sign Up</a>
+    </div>
+
+
+{% endblock %}
