@@ -16,25 +16,26 @@
             <div class="form-group">
                 {{ form.password_confirm.label }}
                 {{ form.password_confirm(id="floatingPassword", placeholder="Confirm Password") }}
+                {% for error in form.password.errors %}
+                <div class="alert alert-danger input-group" role="alert">
+                <span>{{ error }}</span>
+                </div>
+                {% endfor %}
             </div>
             <div class="form-group">
                 {{ form.email.label }}
                 {{ form.email(id="floatingPassword", placeholder="Type Your email") }}
+                {% for error in form.email.errors %}
+                <div class="alert alert-danger input-group" role="alert">
+                <span>{{ error }}</span>
+                </div>
+                {% endfor %}
             </div>
+
             <div class="form-group">
                 {{ form.submit(class="btn") }}
             </div>
         </form>
-        {% for error in form.password.errors %}
-                <div class="alert alert-danger input-group" role="alert">
-                <span>{{ error }}</span>
-                </div>
-                {% endfor %}
-        {% for error in form.email.errors %}
-                <div class="alert alert-danger input-group" role="alert">
-                <span>{{ error }}</span>
-                </div>
-                {% endfor %}
     </div>
     <div class="border-top">
         <p>Already Have An Account? </p>
