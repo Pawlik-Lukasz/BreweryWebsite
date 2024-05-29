@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_bootstrap5 import Bootstrap
+from forms import Registration, Login
 import requests
 import random
 import os
 from dotenv import load_dotenv
-from forms import Registration, Login
 
 load_dotenv()
 app = Flask(__name__)
